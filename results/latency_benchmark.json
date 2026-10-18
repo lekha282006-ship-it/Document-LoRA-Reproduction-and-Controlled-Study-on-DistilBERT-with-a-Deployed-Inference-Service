@@ -1,0 +1,18 @@
+{
+  "num_requests": 100,
+  "median_ms": 54.372750000766246,
+  "mean_ms": 56.975849000154994,
+  "std_ms": 16.151003637911305,
+  "p95_ms": 87.99373499905414,
+  "p99_ms": 103.44275899973589,
+  "min_ms": 37.55530000125873,
+  "max_ms": 117.635299999165,
+  "hardware": {
+    "os": "Windows 10",
+    "cpu": "Intel64 Family 6 Model 126 Stepping 5, GenuineIntel",
+    "cpu_count_logical": "8",
+    "cpu_count_physical": "4",
+    "ram_gb": "11.8 GB",
+    "gpu": "None (CPU only)"
+  }
+}

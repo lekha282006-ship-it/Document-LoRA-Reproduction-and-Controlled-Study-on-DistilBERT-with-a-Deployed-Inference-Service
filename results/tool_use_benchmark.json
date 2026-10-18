@@ -1,0 +1,99 @@
+{
+  "total_tests": 10,
+  "correct_routing": 10,
+  "accuracy_pct": 100.0,
+  "details": [
+    {
+      "id": 1,
+      "prompt": "Can you analyze the sentiment of: 'The acting was breathtaking and the cinematography stunning'?",
+      "expected_call": true,
+      "called_tool": true,
+      "is_correct": true,
+      "tool_output": {
+        "error": "503: Model is not yet initialized or loaded."
+      }
+    },
+    {
+      "id": 2,
+      "prompt": "What is the sentiment in 'The dialogue was horribly clich\u00e9 and predictable'?",
+      "expected_call": true,
+      "called_tool": true,
+      "is_correct": true,
+      "tool_output": {
+        "error": "503: Model is not yet initialized or loaded."
+      }
+    },
+    {
+      "id": 3,
+      "prompt": "Please classify this review: 'An absolute masterpiece of modern cinema.'",
+      "expected_call": true,
+      "called_tool": true,
+      "is_correct": true,
+      "tool_output": {
+        "error": "503: Model is not yet initialized or loaded."
+      }
+    },
+    {
+      "id": 4,
+      "prompt": "Tell me if this is positive or negative: 'The pacing was agonizingly slow and boring.'",
+      "expected_call": true,
+      "called_tool": true,
+      "is_correct": true,
+      "tool_output": {
+        "error": "503: Model is not yet initialized or loaded."
+      }
+    },
+    {
+      "id": 5,
+      "prompt": "Check the sentiment of: 'Best performance of the year, utterly captivating.'",
+      "expected_call": true,
+      "called_tool": true,
+      "is_correct": true,
+      "tool_output": {
+        "error": "503: Model is not yet initialized or loaded."
+      }
+    },
+    {
+      "id": 6,
+      "prompt": "Is 'The plot was completely incoherent and poorly edited' a positive or negative review?",
+      "expected_call": true,
+      "called_tool": true,
+      "is_correct": true,
+      "tool_output": {
+        "error": "503: Model is not yet initialized or loaded."
+      }
+    },
+    {
+      "id": 7,
+      "prompt": "What is the capital of France?",
+      "expected_call": false,
+      "called_tool": false,
+      "is_correct": true,
+      "tool_output": null
+    },
+    {
+      "id": 8,
+      "prompt": "Calculate 42 multiplied by 17.",
+      "expected_call": false,
+      "called_tool": false,
+      "is_correct": true,
+      "tool_output": null
+    },
+    {
+      "id": 9,
+      "prompt": "How do I reverse a string in Python?",
+      "expected_call": false,
+      "called_tool": false,
+      "is_correct": true,
+      "tool_output": null
+    },
+    {
+      "id": 10,
+      "prompt": "Write a short poem about the ocean.",
+      "expected_call": false,
+      "called_tool": false,
+      "is_correct": true,
+      "tool_output": null
+    }
+  ]
+}
