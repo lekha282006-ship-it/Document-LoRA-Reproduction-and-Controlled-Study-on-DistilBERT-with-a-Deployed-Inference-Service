@@ -193,8 +193,8 @@ Tests verify:
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/lekha282006-ship-it/lora-distilbert-study.git
-cd lora-distilbert-study
+git clone https://github.com/lekha282006-ship-it/Document-LoRA-Reproduction-and-Controlled-Study-on-DistilBERT-with-a-Deployed-Inference-Service.git
+cd Document-LoRA-Reproduction-and-Controlled-Study-on-DistilBERT-with-a-Deployed-Inference-Service
 pip install -r requirements.txt
 ```
 
