@@ -172,12 +172,14 @@ tests/test_api.py::test_health_endpoint PASSED
 tests/test_api.py::test_predict_positive_sentiment PASSED
 tests/test_api.py::test_predict_negative_sentiment PASSED
 tests/test_api.py::test_predict_empty_text_validation PASSED
-tests/test_lora.py::test_zero_init PASSED          (max_abs_diff = 0.0)
+tests/test_lora.py::test_zero_init PASSED
 tests/test_lora.py::test_shapes PASSED
-tests/test_lora.py::test_merge PASSED              (merge_diff = 2.15e-06, unmerge_diff = 4.77e-07)
-tests/test_lora.py::test_library_peft_equivalence PASSED  (max_abs_diff = 0.0)
+tests/test_lora.py::test_merge PASSED
+tests/test_lora.py::test_library_peft_equivalence max_abs_diff = 0.00e+00
+PASSED
 
-8 passed in 27.95s
+============================= 8 passed in 19.76s ==============================
+
 
 What the tests check:
 
