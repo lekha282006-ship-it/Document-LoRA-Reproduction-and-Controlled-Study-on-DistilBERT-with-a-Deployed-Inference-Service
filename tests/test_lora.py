@@ -119,6 +119,12 @@ def test_library_peft_equivalence(sample_input):
         peft_model.lin.lora_A["default"].weight.copy_(custom_lora.lora_A.data)
         peft_model.lin.lora_B["default"].weight.copy_(custom_lora.lora_B.data)
 
+    # Verify tensor objects are independent (different memory addresses)
+    peft_base = peft_model.lin.base_layer if hasattr(peft_model.lin, "base_layer") else peft_model.lin.weight
+    assert custom_lora.base_linear.weight.data_ptr() != peft_base.weight.data_ptr()
+    assert custom_lora.lora_A.data_ptr() != peft_model.lin.lora_A["default"].weight.data_ptr()
+    assert custom_lora.lora_B.data_ptr() != peft_model.lin.lora_B["default"].weight.data_ptr()
+
     custom_lora.eval()
     peft_model.eval()
 
@@ -127,4 +133,6 @@ def test_library_peft_equivalence(sample_input):
         peft_out = peft_model(sample_input)
 
     max_diff = torch.max(torch.abs(custom_out - peft_out)).item()
+    print(f"max_abs_diff = {max_diff:.2e}")
     assert max_diff < 1e-5, f"Scratch LoRA vs HF PEFT mismatch: max abs diff = {max_diff}"
+
