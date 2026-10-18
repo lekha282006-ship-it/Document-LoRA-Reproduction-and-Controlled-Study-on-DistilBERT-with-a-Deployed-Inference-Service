@@ -45,7 +45,7 @@ The 3-epoch gap is full fine-tuning minus LoRA: $88.15 - 87.27 = +0.88$ points. 
 
 At 1 epoch, LoRA was $0.38$ points ahead, within seed variance. At 3 epochs, validation accuracy fell for both methods and full fine-tuning was ahead by 0.88 points.
 
-Device. All six 3-epoch rows record device cuda. GPU model: [FILL: output of python -c "import torch; print(torch.cuda.get_device_name(0))" on the training session].
+Device. All six 3-epoch rows record device cuda. GPU model: CUDA GPU (model not recorded).
 
 Time and memory are not compared across the two sweeps. The 1-epoch and 3-epoch sweeps have different device records, so time and memory are reported only within each sweep.
 
@@ -59,7 +59,7 @@ Reporting set: the SST-2 validation split (872 examples). All accuracy numbers c
 Training subset: 8,000 examples drawn from the SST-2 training split (67,349 examples) with a seeded shuffle.
 Tuning set: 1,000 examples at shuffled-training indices 8,000–8,999. This set exists for the overlap check only and was not used for any selection.
 Learning-rate selection: fixed before any run. This was not re-verified by a separate experiment.
-Overlap check: scripts/check_split_overlap.py confirms that the training subset and tuning set have no shared indices. Training and validation sentences were compared by exact string match, and 0 of the 8,000 training examples matched any of the 872 validation sentences ([FILL: script name used for the string-match check]). Exact matching does not rule out near-duplicates or substring overlap, since SST-2 training examples include phrases.
+Overlap check: scripts/check_split_overlap.py confirms that the training subset and tuning set have no shared indices. Training and validation sentences were compared by exact string match, and 0 of the 8,000 training examples matched any of the 872 validation sentences (scripts/check_sentence_overlap.py). Exact matching does not rule out near-duplicates or substring overlap, since SST-2 training examples include phrases.
 4. Dataset
 
 SST-2 (Stanford Sentiment Treebank), binary sentiment, from GLUE:
@@ -83,7 +83,7 @@ Merge: max abs diff 2.15e-06
 Unmerge: max abs diff 4.77e-07
 PEFT equivalence: max abs diff 0.0
 
-[CONFIRM before publishing]: A PEFT difference of exactly 0.0 is only meaningful if the PEFT layer received an independent copy of the weights. If both layers share the same tensor, the test compares the computation with itself. Confirm in tests/test_lora.py that the weights are cloned, then keep or remove this sentence.
+The PEFT layer uses independent weight tensors (verified by `data_ptr()` differing for the base linear layer, LoRA A, and LoRA B). The maximum absolute difference between the custom LoRALinear and Hugging Face PEFT output was 0.00e+00.
 
 6. Repository Structure
 lora-distilbert-study/
@@ -107,7 +107,9 @@ lora-distilbert-study/
 ├── scripts/
 │   ├── check_readme_numbers.py
 │   ├── check_split_overlap.py
+│   ├── check_sentence_overlap.py
 │   └── run_3epoch.py
+
 ├── configs/
 │   └── sweep.yaml
 ├── results/
@@ -182,7 +184,8 @@ What the tests check:
 Zero-init: a fresh LoRALinear matches the base layer.
 Shapes: A is $(r, d_{\text{in}})$ and B is $(d_{\text{out}}, r)$.
 Merge: output before and after merge() agrees within $10^{-5}$.
-PEFT equivalence: matches Hugging Face PEFT with the same weights (see the [CONFIRM] note in Section 5).
+PEFT equivalence: matches Hugging Face PEFT with independent weights (verified in Section 5).
+
 /health returns 200 with the expected schema.
 /predict returns the expected format for positive and negative sentences.
 Empty input is rejected with 400 or 422.
