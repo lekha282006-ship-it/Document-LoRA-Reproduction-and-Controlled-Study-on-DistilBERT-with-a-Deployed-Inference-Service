@@ -1,0 +1,15 @@
+{
+  "base_model_name": "distilbert-base-uncased",
+  "r": 8,
+  "lora_alpha": 16.0,
+  "target_modules": [
+    "q_lin",
+    "v_lin"
+  ],
+  "num_labels": 2,
+  "best_run_id": "D",
+  "seed": 42,
+  "val_accuracy": 0.908257,
+  "val_loss": 0.2841,
+  "trainable_params": 739586
+}
