@@ -38,6 +38,22 @@ Source: [`results/results.csv`](results/results.csv). Verify with `python script
 >
 > Individual run values: Train time and peak VRAM are from Run A/seed 42 (38.5s, 1480.5 MB), Run B/seed 42 (24.2s, 920.4 MB), Run C/seed 42 (25.1s, 945.8 MB), Run D/seed 42 (26.4s, 982.1 MB); all runs within each config showed identical VRAM and ≤0.3s variation in train time. All 1-epoch runs executed on `cuda:0`.
 
+### 3-Epoch Experiment (Deeper Training Comparison)
+
+To study whether extended training alters the gap between full fine-tuning and LoRA, Run A (Full Fine-Tuning) and Run D (LoRA $r=8$) were trained for 3 epochs using the identical 8,000-example training subset, batch size 32, learning rates ($2\times 10^{-5}$ and $2\times 10^{-4}$), and random seeds (`42, 43, 44`).
+
+Source: [`results/results_3epoch.csv`](results/results_3epoch.csv).
+
+**1-Epoch vs 3-Epoch Comparison Table (Mean ± Standard Deviation over 3 Seeds)**
+
+| Method | Config | 1-Epoch Val Acc (Mean ± Std %) | 3-Epoch Val Acc (Mean ± Std %) | 1-Epoch Time (s) | 3-Epoch Time (s) | 1-Epoch Peak VRAM (MB) | 3-Epoch Peak VRAM (MB) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Full FT** | Run A (lr=2e-5) | **90.29 ± 0.35%** | **88.15 ± 0.85%** | 38.5 ± 0.3s | 236.8 ± 2.2s | 1480.5 | 2104.6 |
+| **LoRA** | Run D ($r=8$, lr=2e-4) | **90.67 ± 0.37%** | **87.27 ± 0.61%** | 26.4 ± 0.2s | 163.2 ± 0.1s | 982.1 | 1212.6 |
+
+**Analysis of 3-Epoch Results**:
+At 1 epoch, LoRA ($r=8$) slightly outperformed full fine-tuning with an accuracy gap of $+0.38\%$ in favor of LoRA, which fell well within seed variance ($\pm 0.35\%$ to $\pm 0.37\%$). When training was extended to 3 epochs on the fixed 8,000-example subset without early stopping, validation accuracy decreased for both methods (full fine-tuning dropped by $2.14\%$ to $88.15\% \pm 0.85\%$, and LoRA $r=8$ dropped by $3.40\%$ to $87.27\% \pm 0.61\%$), indicating mild overfitting on the training subset as training loss reached $\approx 0.11$ for full FT and $\approx 0.25$ for LoRA. The accuracy gap between full fine-tuning and LoRA shifted from $+0.38\%$ (favoring LoRA at 1 epoch) to $-0.88\%$ (favoring full FT at 3 epochs), a delta of $1.26\%$. This change in gap ($1.26\%$) is larger than the individual seed standard deviations ($0.35\%$--$0.85\%$), indicating that under fixed learning rates and extended training without early stopping, full fine-tuning maintained slightly higher validation performance than LoRA $r=8$.
+
 ---
 
 ## 2. Findings

@@ -82,14 +82,10 @@ No change is required on GitHub.
 Run `git log --oneline` to see the full commit history.
 
 Key commits (in order):
-1. `Initial commit: add .gitignore and directory structure`
-2. `Phase 2: implement LoRA from scratch with tests passing against HF PEFT`
-3. `Phase 3: add training pipeline, dataset loaders, model wrapper, and sweep configs`
-4. `Phase 4: add sweep results data, visualization figures, and analysis notebook`
-5. `Phase 5: add FastAPI inference service with tests and saved best LoRA adapter`
-6. `Phase 6: add production Dockerfile and container configuration`
-7. `Phase 7: add optional Ollama tool-use agent extension`
-8. `Documentation: add comprehensive README with findings, reproduction guide, and benchmarks`
-9. `Docs: set clone URL to correct GitHub repository name`
-10. `Docs: update clone URL to match GitHub repository name`
-11. *(current strengthening commits follow)*
+1. `435cdea` Docs: update clone URL to match GitHub repository name
+2. `2841061` Task 2: add evaluation protocol sanity check and non-overlap verification
+3. `c45d599` Task 3: make repository verifiable with corrected README and metric audit scripts
+4. `e23a168` Task 4: document Docker deployment and add 3-epoch execution runner
+5. `2cf3e20` Task 1: add 3-epoch experiment with results_3epoch.csv and comparison analysis
+
+
