@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches and environments
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Datasets and checkpoints
+data/
+checkpoints/
+models/
+*.pt
+*.bin
+*.safetensors
+!adapters/*.pt
+!adapters/*.json
+!adapters/*.safetensors
+
+# Logs and system
+*.log
+results/logs/*.log
+.DS_Store
+Thumbs.db
