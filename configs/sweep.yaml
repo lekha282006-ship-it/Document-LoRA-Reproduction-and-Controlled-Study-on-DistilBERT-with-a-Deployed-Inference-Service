@@ -1,0 +1,48 @@
+# Controlled Experiment Configuration for LoRA on DistilBERT (SST-2)
+# Reference: Hu et al., "LoRA: Low-Rank Adaptation of Large Language Models" (2021)
+
+common:
+  base_model: "distilbert-base-uncased"
+  dataset_name: "glue/sst2"
+  subset_size: 8000
+  batch_size: 32
+  epochs: 1
+  max_length: 128
+  weight_decay: 0.01
+  warmup_ratio: 0.06
+  target_modules:
+    - "q_lin"
+    - "v_lin"
+
+runs:
+  A:
+    description: "Full fine-tuning baseline (all parameters trainable)"
+    method: "full"
+    rank: null
+    lora_alpha: null
+    learning_rate: 2.0e-5
+    seeds: [42, 43, 44]
+
+  B:
+    description: "LoRA rank r=1, alpha=2 (alpha = 2r scaling rule)"
+    method: "lora"
+    rank: 1
+    lora_alpha: 2.0
+    learning_rate: 2.0e-4
+    seeds: [42, 43, 44]
+
+  C:
+    description: "LoRA rank r=4, alpha=8 (alpha = 2r scaling rule)"
+    method: "lora"
+    rank: 4
+    lora_alpha: 8.0
+    learning_rate: 2.0e-4
+    seeds: [42, 43, 44]
+
+  D:
+    description: "LoRA rank r=8, alpha=16 (alpha = 2r scaling rule)"
+    method: "lora"
+    rank: 8
+    lora_alpha: 16.0
+    learning_rate: 2.0e-4
+    seeds: [42, 43, 44]
